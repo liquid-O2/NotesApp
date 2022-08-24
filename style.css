@@ -115,7 +115,7 @@ main{
 .form-container{
     background-color: var(--background);
     min-height: 1.5rem;
-    min-width: 841px;
+    max-width: 841px;
     padding: 1.5rem;
     border-radius: 10px;
     margin-top: 2.25rem;
@@ -203,6 +203,8 @@ input:focus {
     flex-wrap: wrap;
     margin-top: 1.6rem;
     backdrop-filter: blur(52px);
+    max-width: 841px;
+    line-height: 150%;
   }
 
   .note{
@@ -211,7 +213,7 @@ input:focus {
     margin-top: 0;
     /* margin-right: 1rem; */
     /* min-width: 258px; */
-    width: 32%;
+    max-width: 32%;
     height: fit-content ;
     /* display: flex;
     flex-direction: column;
@@ -225,6 +227,7 @@ input:focus {
     font-family: 'agrandirtext_bold', sans-serif;
     margin-bottom: 0.75rem;
     word-wrap:break-word;
+    line-height: 100%;
   }
   .note-text{
     margin-bottom: 1rem;
