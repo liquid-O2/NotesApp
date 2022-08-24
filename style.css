@@ -83,7 +83,7 @@ main{
     font-weight: lighter;
 }
 
-#note-title{
+#note-title, #modal-title{
     display: none;
     font-family: 'agrandirtext_bold', sans-serif;
     background: none;
@@ -94,7 +94,7 @@ main{
     margin-bottom: 1rem;
 }
 
-#note-text{
+#note-text, #modal-text{
     background: none;
     color: var(--white);
     font-size: 1.25rem;
@@ -164,7 +164,7 @@ input:focus {
     margin-right: 0.5rem
   }
 
-  #form-close-button{
+  #form-close-button, #modal-close-button{
     padding: 0.75rem 1rem;
     padding-bottom: 0.6rem;
     width: 93px;
@@ -217,7 +217,7 @@ input:focus {
     justify-content: space-between; */
     border: 1px solid var(--white30)
   }
-  .note-title{
+  .note-title, #modal-title{
     padding-bottom: 0.5rem;
     font-size: 1.0625rem;
     border-bottom: 1px solid var(--white30);
@@ -258,3 +258,57 @@ input:focus {
   .color-picker{
     margin-right: 0.5rem;
   }
+
+  .modal{
+  position: fixed;
+  left: 0;
+  z-index: 200;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 43, 43, 0.7);
+  display: none;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  }
+  .modalContent{
+    position: absolute;
+    color: var(--white);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--backgroundDark);
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 1rem;
+    backdrop-filter: blur(8px);
+    border:1px solid var(--white30)
+  }
+
+  #modal-text,  #modal-title, #modal-close-button{
+    font-size: 1rem;
+  }
+#modal-close-button{
+  align-self: end;
+}
+#modal-title {
+  display: block;
+  margin-bottom: 0;
+}
+
+#modal-text{
+  margin-bottom:1rem;
+}
+
+.open-modal {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
