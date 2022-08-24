@@ -100,6 +100,7 @@ main{
     font-size: 1.25rem;
     margin-bottom: -5px;
     overflow: hidden;
+    line-height: 1.875rem;
 }
 
 #form-buttons{
@@ -223,9 +224,11 @@ input:focus {
     border-bottom: 1px solid var(--white30);
     font-family: 'agrandirtext_bold', sans-serif;
     margin-bottom: 0.75rem;
+    word-wrap:break-word;
   }
   .note-text{
     margin-bottom: 1rem;
+    word-wrap:break-word;
       }
 
   .toolbar{
@@ -287,7 +290,8 @@ input:focus {
     justify-content: center;
     row-gap: 1rem;
     backdrop-filter: blur(8px);
-    border:1px solid var(--white30)
+    border:1px solid var(--white30);
+    height: fit-content;
   }
 
   #modal-text,  #modal-title, #modal-close-button{
@@ -299,10 +303,16 @@ input:focus {
 #modal-title {
   display: block;
   margin-bottom: 0;
+  word-wrap:break-word;
 }
 
 #modal-text{
   margin-bottom:1rem;
+  word-wrap:break-word;
+  word-break:break-all;
+  width:100%;
+  height: fit-content;
+
 }
 
 .open-modal {
