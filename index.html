@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header><h2 class="title">Create a note</h2></header>
+        <div class="totalContainer">
+        <div class="form-container">
+            <form autocomplete="off" id="form">
+                <input type="text" id="note-title" placeholder="Title">
+                <input type="text" id="note-text" placeholder="Write a note">
+                <div id="form-buttons">
+                    <button type="submit" id="submit-button"> Save </button>
+                    <button type="button" id="form-close-button"> Close </button>
+                </div>
+            </form>
+        </div>
+        <div id="note"></div>
+        <div id="placeholder">
+            <img src="Pen.svg" alt="">
+            <p class="placeholder-label">There are no notes yet</p>
+        </div>
+    </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
