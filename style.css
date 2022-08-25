@@ -380,3 +380,11 @@ input:focus {
 #green{
   background: #0D533640;
 }
+
+#color-tooltip.visible{
+  display: flex;
+}
+
+.fixThis{
+  height: fit-content;
+}

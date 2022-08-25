@@ -31,17 +31,19 @@ class App{
             this.deleteNote(event);
             this.deleteNote2(event);
             this.openModal(event);
+            this.openTooltip(event)
+            // this.closeTooltip(event);
            console.log(typeof(this.notes))
             
         })
 
-        document.body.addEventListener('mouseover', event =>{
-            this.openTooltip(event)
-        })
+        // document.body.addEventListener('mouseover', event =>{
+        //     this.openTooltip(event)
+        // })
 
-        document.body.addEventListener('mouseout', event => {
-            this.closeTooltip(event);  
-         });
+        // document.body.addEventListener('mouseout', event => {
+        //     this.closeTooltip(event);  
+        //  });
 
         this.$form.addEventListener('submit', event =>{
             event.preventDefault();
@@ -56,13 +58,13 @@ class App{
         this.$modalCloseButton.addEventListener('click', event =>{
             this.closeModal()
         })
-        this.$colorTooltip.addEventListener('mouseover', function() {
-            this.style.display = 'flex';  
+        this.$colorTooltip.addEventListener('click', function() {
+            this.classList.toggle("visible")
           })
           
-          this.$colorTooltip.addEventListener('mouseout', function() {
-             this.style.display = 'none'; 
-          })
+        //   this.$colorTooltip.addEventListener('click', function() {
+        //      this.style.display = 'none'; 
+        //   })
           this.$colorTooltip.addEventListener('click', event => {
             const color = event.target.dataset.color; 
             if (color) {
@@ -129,14 +131,14 @@ class App{
             this.id = event.target.dataset.id; 
             const noteCoords = event.target.getBoundingClientRect();
             const horizontal = noteCoords.left;
-            const vertical = window.scrollY - 40;
+            const vertical = window.scrollY-20;
             console.log('hello i was hovered over');
-            this.$colorTooltip.style.display = 'flex';
+            this.$colorTooltip.classList.toggle('visible')
             this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
         }
         closeTooltip(event) {
             if(!event.target.matches(".color-picker")) return;
-            this.$colorTooltip.style.display = 'none';  
+            // this.$colorTooltip.classList.remove('visible')  
           }
 
         addNote({title, text}){
