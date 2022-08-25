@@ -389,11 +389,11 @@ input:focus {
 @media only screen and (max-width: 892px) {
   main{
     padding:24px 24px;
-    /* overflow: scroll; */
+    overflow: scroll;
   }
   .total-container{
-    padding: 0 24px;
-    overflow: scroll;
+    padding: 24px 24px;
+    
   }
   .form-container{
     width: 90vw;
