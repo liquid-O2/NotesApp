@@ -1,6 +1,7 @@
 class App{
     constructor(){
-        this.notes = []
+
+        this.notes = JSON.parse(localStorage.getItem('notes')) || [];
         this.title =''
         this.text =''
         this.id =''
@@ -19,6 +20,7 @@ class App{
         this.$modalText = document.querySelector("#modal-text")
         this.$modalCloseButton = document.querySelector("#modal-close-button")
         this.$colorTooltip = document.querySelector('#color-tooltip');
+        this.render()
         this.addEventListeners()
     }
     addEventListeners(){
@@ -29,7 +31,7 @@ class App{
             this.deleteNote(event);
             this.deleteNote2(event);
             this.openModal(event);
-           
+           console.log(typeof(this.notes))
             
         })
 
@@ -145,7 +147,7 @@ class App{
                 id:this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
             };
             this.notes=[...this.notes, newNote]
-            this.displayNotes();
+            this.render();
             this.closeForm()
         }
 
@@ -155,7 +157,7 @@ class App{
             this.notes = this.notes.map(note =>
                 note.id === Number(this.id) ? {...note, title, text} : note
             );
-            this.displayNotes()
+            this.render()
         }
 
         deleteNote(event) {
@@ -165,7 +167,7 @@ class App{
             this.notes = this.notes.filter(note => note.id !== Number(id));
             console.log("The first deleteNote event was triggered")
             event.stopPropagation();
-            this.displayNotes();
+            this.render();
 
         }
 
@@ -176,7 +178,7 @@ class App{
         this.notes = this.notes.filter(note => note.id !== Number(id));
         console.log("The second deleteNote event was triggered")
         event.stopPropagation();
-        this.displayNotes();
+        this.render();
       }
 
 
@@ -184,7 +186,7 @@ class App{
         this.notes = this.notes.map(note =>
           note.id === Number(this.id) ? { ...note, color } : note
         );
-        this.displayNotes();
+        this.render();
       }
 
     selectNote(event){
@@ -197,26 +199,35 @@ class App{
 
     }
 
-    displayNotes(){
-        const hasNotes = this.notes.length > 0
-        hasNotes ? this.$placeholder.style.display = 'none' : this.$placeholder.style.display = 'flex'
-        this.$notes.innerHTML = this.notes.map(note=>`
-                <div style="background: ${note.color};" class="note" data-id="${note.id}">
-                    <div class="${note.title && 'note-title'}">${note.title}</div>
-                    <div class="note-text">${note.text}</div>
-                    <div class="toolbar-container">
-                        <div class="toolbar" data-id="${note.id}">
-                            <div class='color-picker' data-id="${note.id}">
-                              <img class="toolbar-color" src="./color.svg">
-                            </div>
-                            <div class='trash' data-id="${note.id}" >
-                                <img class="toolbar-delete" src="./trash.svg" data-id="${note.id}" >
-                            </div>
-                        </div>
-                    </div>
-                </div>`).join("");
-        }
+    render(){
+        this.saveNotes();
+        this.displayNotes(); 
     }
+
+    saveNotes() {
+        localStorage.setItem('notes', JSON.stringify(this.notes))  
+      }
+
+        displayNotes(){
+                const hasNotes = this.notes.length > 0
+                hasNotes ? this.$placeholder.style.display = 'none' : this.$placeholder.style.display = 'flex'
+                this.$notes.innerHTML = this.notes.map(note=>`
+                        <div style="background: ${note.color};" class="note" data-id="${note.id}">
+                            <div class="${note.title && 'note-title'}">${note.title}</div>
+                            <div class="note-text">${note.text}</div>
+                            <div class="toolbar-container">
+                                <div class="toolbar" data-id="${note.id}">
+                                    <div class='color-picker' data-id="${note.id}">
+                                    <img class="toolbar-color" src="./color.svg">
+                                    </div>
+                                    <div class='trash' data-id="${note.id}" >
+                                        <img class="toolbar-delete" src="./trash.svg" data-id="${note.id}" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`).join("");
+                }
+            }
 
 
 new App();
