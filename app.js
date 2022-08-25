@@ -31,6 +31,8 @@ class App{
             this.deleteNote(event);
             this.deleteNote2(event);
             this.openModal(event);
+            this.openModal2(event);
+            this.openModal3(event);
             this.openTooltip(event)
             // this.closeTooltip(event);
            console.log(typeof(this.notes))
@@ -120,7 +122,21 @@ class App{
                 this.$modalText.value = this.text
             }
         }
-
+        openModal2(event){
+            if (event.target.matches('.note-title')){
+                this.$modal.classList.toggle('open-modal')
+                this.$modalTitle.value = this.title
+                this.$modalText.value = this.text
+            }
+        }
+        openModal3(event){
+            if (event.target.matches('.note-text')){
+                this.$modal.classList.toggle('open-modal')
+                this.$modalTitle.value = this.title
+                this.$modalText.value = this.text
+            }
+        }
+    
         closeModal(event){
             this.editNote()
             this.$modal.classList.toggle('open-modal')
