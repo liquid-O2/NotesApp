@@ -389,6 +389,7 @@ input:focus {
 @media only screen and (max-width: 892px) {
   main{
     padding:0 24px;
+    overflow: scroll;
   }
   .total-container{
     padding: 0 24px;
@@ -408,7 +409,7 @@ input:focus {
   #note{
     width: 90vw;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     margin: auto;
   }
   .note{
