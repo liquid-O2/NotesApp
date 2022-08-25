@@ -130,16 +130,18 @@ class App{
             if(!event.target.matches(".color-picker")) return;
             this.id = event.target.dataset.id; 
             const noteCoords = event.target.getBoundingClientRect();
-            const horizontal = noteCoords.left;
-            const vertical = window.scrollY-20;
+            const horizontal = window.scrollX + noteCoords.left;
+            const vertical = window.scrollY;
+            // const horizontal = noteCoords.left;
+            // const vertical = window.scrollY - 20;
             console.log('hello i was hovered over');
-            this.$colorTooltip.classList.toggle('visible')
+            this.$colorTooltip.classList.toggle('visible');
             this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
         }
-        closeTooltip(event) {
-            if(!event.target.matches(".color-picker")) return;
-            // this.$colorTooltip.classList.remove('visible')  
-          }
+        // closeTooltip(event) {
+        //     if(!event.target.matches(".color-picker")) return;
+        //     // this.$colorTooltip.classList.remove('visible')  
+        //   }
 
         addNote({title, text}){
             const newNote = {

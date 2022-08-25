@@ -221,7 +221,7 @@ input:focus {
     flex-direction: column;
     justify-content: space-between; */
     border: 1px solid var(--white30);
-    overflow:hidden;
+    /* overflow:hidden; */
     backdrop-filter: blur(52px);
   }
   .note-title, #modal-title{
@@ -341,7 +341,7 @@ input:focus {
   left: 0;
   z-index: 20000000000;
   border-radius: 0.5rem;
-  display: none;
+  display: flex;
   padding: 8px 16px;
   width: auto;
   height: auto;
@@ -382,9 +382,5 @@ input:focus {
 }
 
 #color-tooltip.visible{
-  display: flex;
-}
-
-.fixThis{
-  height: fit-content;
+  display: none;
 }
