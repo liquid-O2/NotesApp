@@ -214,7 +214,7 @@ input:focus {
     border-radius: 0.5rem;
     margin-top: 0;
     /* margin-right: 1rem; */
-    /* min-width: 258px; */
+    min-width: 258px;
     max-width: 32%;
     height: fit-content ;
     /* display: flex;
@@ -241,6 +241,7 @@ input:focus {
   .toolbar{
     display: flex;
     justify-content: end;
+    z-index: 9999999999999;
   }
   
   .toolbar  img{
@@ -263,6 +264,7 @@ input:focus {
     padding: 0.5rem;
     border-radius: 8px;
     border: 1px solid var(--white30);
+    background-color: var(--backgroundDark);
   }
 
   .color-picker{
@@ -328,4 +330,53 @@ input:focus {
   visibility: visible;
   transform: scale(1);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+#color-tooltip {
+  border-bottom: 2px solid #fff;
+  position: absolute;
+  top: -40;
+  background: var(--backgroundDark);
+  border: 1px solid var(--white30);
+  left: 0;
+  z-index: 20000000000;
+  border-radius: 0.5rem;
+  display: none;
+  padding: 8px 16px;
+  width: auto;
+  height: auto;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+  backdrop-filter: blur(28);
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--white30);
+}
+
+.color-option:hover {
+  border: 1px solid #ffffff60;
+}
+
+#black {
+  background: #00000040;
+}
+
+#red {
+  background: #530D0D40;
+}
+
+#blue {
+  background: #0D2D5340;
+}
+
+#yellow {
+  background: #53500D40;
+}
+
+#green{
+  background: #0D533640;
 }

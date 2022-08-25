@@ -18,17 +18,27 @@ class App{
         this.$modalTitle = document.querySelector("#modal-title")
         this.$modalText = document.querySelector("#modal-text")
         this.$modalCloseButton = document.querySelector("#modal-close-button")
+        this.$colorTooltip = document.querySelector('#color-tooltip');
         this.addEventListeners()
     }
     addEventListeners(){
         document.body.addEventListener('click',event =>{
             this.handleFormClick(event)
-            this.handleCloseButton(event)
-            this.selectNote(event)
-            this.openModal(event)
-            
+            this.handleCloseButton(event);
+            this.selectNote(event);
+            this.openModal(event);
+            this.deleteNote(event);
+            this.deleteNote2(event);
             
         })
+
+        document.body.addEventListener('mouseover', event =>{
+            this.openTooltip(event)
+        })
+
+        document.body.addEventListener('mouseout', event => {
+            this.closeTooltip(event);  
+         });
 
         this.$form.addEventListener('submit', event =>{
             event.preventDefault();
@@ -43,7 +53,19 @@ class App{
         this.$modalCloseButton.addEventListener('click', event =>{
             this.closeModal()
         })
-
+        this.$colorTooltip.addEventListener('mouseover', function() {
+            this.style.display = 'flex';  
+          })
+          
+          this.$colorTooltip.addEventListener('mouseout', function() {
+             this.style.display = 'none'; 
+          })
+          this.$colorTooltip.addEventListener('click', event => {
+            const color = event.target.dataset.color; 
+            if (color) {
+              this.editNoteColor(color);  
+            }
+         })
 
     }
 
@@ -100,8 +122,20 @@ class App{
             this.$modal.classList.toggle('open-modal')
         }
 
-
-    
+        openTooltip(event){
+            if(!event.target.matches(".color-picker")) return;
+            this.id = event.target.dataset.id; 
+            const noteCoords = event.target.getBoundingClientRect();
+            const horizontal = noteCoords.left;
+            const vertical = window.scrollY - 20;
+            console.log('hello i was hovered over');
+            this.$colorTooltip.style.display = 'flex';
+            this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
+        }
+        closeTooltip(event) {
+            if(!event.target.matches(".color-picker")) return;
+            this.$colorTooltip.style.display = 'none';  
+          }
 
     addNote({title, text}){
         const newNote = {
@@ -124,6 +158,32 @@ class App{
         this.displayNotes()
     }
 
+    deleteNote(event) {
+        event.stopPropagation();
+        if (!event.target.matches('.toolbar-delete')) return;
+        const id = event.target.dataset.id;
+        this.notes = this.notes.filter(note => note.id !== Number(id));
+        console.log("The first deleteNote event was triggered")
+        this.displayNotes();
+      }
+
+      deleteNote2(event) {
+        event.stopPropagation();
+        if (!event.target.matches('.trash')) return;
+        const id = event.target.dataset.id;
+        this.notes = this.notes.filter(note => note.id !== Number(id));
+        console.log("The second deleteNote event was triggered")
+        this.displayNotes();
+      }
+
+
+    editNoteColor(color) {
+        this.notes = this.notes.map(note =>
+          note.id === Number(this.id) ? { ...note, color } : note
+        );
+        this.displayNotes();
+      }
+
     selectNote(event){
         const $selectedNote= event.target.closest('.note')
         if (!$selectedNote) return
@@ -142,12 +202,12 @@ class App{
                     <div class="${note.title && 'note-title'}">${note.title}</div>
                     <div class="note-text">${note.text}</div>
                     <div class="toolbar-container">
-                        <div class="toolbar">
-                            <div class='color-picker'>
+                        <div class="toolbar" data-id="${note.id}">
+                            <div class='color-picker' data-id="${note.id}">
                               <img class="toolbar-color" src="./color.svg">
                             </div>
-                            <div class='trash'>
-                                <img class="toolbar-delete" src="./trash.svg">
+                            <div class='trash' data-id="${note.id}" >
+                                <img class="toolbar-delete" src="./trash.svg" data-id="${note.id}" >
                             </div>
                         </div>
                     </div>
