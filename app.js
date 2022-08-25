@@ -129,7 +129,7 @@ class App{
             this.id = event.target.dataset.id; 
             const noteCoords = event.target.getBoundingClientRect();
             const horizontal = noteCoords.left;
-            const vertical = window.scrollY - 20;
+            const vertical = window.scrollY - 40;
             console.log('hello i was hovered over');
             this.$colorTooltip.style.display = 'flex';
             this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
