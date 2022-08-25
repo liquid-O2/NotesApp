@@ -395,13 +395,15 @@ input:focus {
     height: max-content;
     min-height: 100vh;
     padding:24px 24px;
-    /* overflow: scroll; */
+    overflow: scroll;
+    overflow-x: hidden;
     
     /* min-height: fit-content; */
   }
   .total-container{
     padding: 24px 24px;
-    /* overflow: scroll; */
+    overflow: scroll;
+    overflow-x: hidden;
     height: fit-content;
   }
   .form-container{
