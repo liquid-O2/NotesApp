@@ -26,9 +26,10 @@ class App{
             this.handleFormClick(event)
             this.handleCloseButton(event);
             this.selectNote(event);
-            this.openModal(event);
             this.deleteNote(event);
             this.deleteNote2(event);
+            this.openModal(event);
+           
             
         })
 
@@ -109,11 +110,10 @@ class App{
         }
 
         openModal(event){
-            if (event.target.closest('.note')){
+            if (event.target.matches('.note')){
                 this.$modal.classList.toggle('open-modal')
                 this.$modalTitle.value = this.title
                 this.$modalText.value = this.text
-            
             }
         }
 
@@ -137,42 +137,45 @@ class App{
             this.$colorTooltip.style.display = 'none';  
           }
 
-    addNote({title, text}){
-        const newNote = {
-            title,
-            text,
-            color: "#00000040",
-            id:this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
-        };
-        this.notes=[...this.notes, newNote]
-        this.displayNotes();
-        this.closeForm()
-    }
+        addNote({title, text}){
+            const newNote = {
+                title,
+                text,
+                color: "#00000040",
+                id:this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
+            };
+            this.notes=[...this.notes, newNote]
+            this.displayNotes();
+            this.closeForm()
+        }
 
-    editNote(){
-        const title = this.$modalTitle.value
-        const text = this.$modalText.value
-        this.notes = this.notes.map(note =>
-            note.id === Number(this.id) ? {...note, title, text} : note
-        );
-        this.displayNotes()
-    }
+        editNote(){
+            const title = this.$modalTitle.value
+            const text = this.$modalText.value
+            this.notes = this.notes.map(note =>
+                note.id === Number(this.id) ? {...note, title, text} : note
+            );
+            this.displayNotes()
+        }
 
-    deleteNote(event) {
-        event.stopPropagation();
-        if (!event.target.matches('.toolbar-delete')) return;
-        const id = event.target.dataset.id;
-        this.notes = this.notes.filter(note => note.id !== Number(id));
-        console.log("The first deleteNote event was triggered")
-        this.displayNotes();
-      }
+        deleteNote(event) {
+            
+            if (!event.target.matches('.toolbar-delete')) {return};
+            const id = event.target.dataset.id;
+            this.notes = this.notes.filter(note => note.id !== Number(id));
+            console.log("The first deleteNote event was triggered")
+            event.stopPropagation();
+            this.displayNotes();
+
+        }
 
       deleteNote2(event) {
-        event.stopPropagation();
+        
         if (!event.target.matches('.trash')) return;
         const id = event.target.dataset.id;
         this.notes = this.notes.filter(note => note.id !== Number(id));
         console.log("The second deleteNote event was triggered")
+        event.stopPropagation();
         this.displayNotes();
       }
 
