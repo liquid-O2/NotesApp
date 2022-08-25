@@ -341,7 +341,7 @@ input:focus {
   left: 0;
   z-index: 20000000000;
   border-radius: 0.5rem;
-  display: flex;
+  display: none;
   padding: 8px 16px;
   width: auto;
   height: auto;
@@ -382,5 +382,5 @@ input:focus {
 }
 
 #color-tooltip.visible{
-  display: none;
+  display: flex;
 }
