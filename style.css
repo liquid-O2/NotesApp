@@ -422,4 +422,7 @@ input:focus {
   .color-picker{
     visibility: hidden;
   }
+  .title{
+    margin-top: 2rem;
+  }
 }
