@@ -5,6 +5,8 @@ class App{
         this.title =''
         this.text =''
         this.id =''
+        this.xCord =0
+        this.yCord=0
         // this.addEventListeners()
         this.$form = document.querySelector("#form")
         this.$noteTitle = document.querySelector("#note-title")
@@ -20,6 +22,7 @@ class App{
         this.$modalText = document.querySelector("#modal-text")
         this.$modalCloseButton = document.querySelector("#modal-close-button")
         this.$colorTooltip = document.querySelector('#color-tooltip');
+        
         this.render()
         this.addEventListeners()
     }
@@ -37,11 +40,7 @@ class App{
             
         })
 
-        // document.body.addEventListener('mouseover', event =>{
-        //     this.openTooltip(event)
-        // })
-
-        // document.body.addEventListener('mouseout', event => {
+        // document.body.addEventListener('mouseover', event => {
         //     this.closeTooltip(event);  
         //  });
 
@@ -58,9 +57,12 @@ class App{
         this.$modalCloseButton.addEventListener('click', event =>{
             this.closeModal()
         })
-        this.$colorTooltip.addEventListener('click', function() {
-            this.classList.toggle("visible")
-          })
+        // this.$colorToolbar.addEventListener('click', event =>{
+        //     // this.classList.toggle("visible")
+        //     this.xCord = event.ClientX;
+        //     console.log("X". this.xCord)
+        //     this.yCord = event.ClientY;
+        //   })
           
         //   this.$colorTooltip.addEventListener('click', function() {
         //      this.style.display = 'none'; 
@@ -129,14 +131,17 @@ class App{
         openTooltip(event){
             if(!event.target.matches(".color-picker")) return;
             this.id = event.target.dataset.id; 
-            const noteCoords = event.target.getBoundingClientRect();
-            const horizontal = window.scrollX + noteCoords.left;
-            const vertical = window.scrollY;
+            const xCord = event.ClientX;
+            const yCord = event.ClientY;
+
+            console.log(xCord)
+            // const horizontal = window.scrollX + noteCoords.left;
+            // const vertical = window.scrollY;
             // const horizontal = noteCoords.left;
             // const vertical = window.scrollY - 20;
             console.log('hello i was hovered over');
             this.$colorTooltip.classList.toggle('visible');
-            this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
+            this.$colorTooltip.style.transform = `translate(${xCord}px, ${yCord}px)`;
         }
         // closeTooltip(event) {
         //     if(!event.target.matches(".color-picker")) return;
@@ -230,6 +235,13 @@ class App{
                                 </div>
                             </div>
                         </div>`).join("");
+                        this.$colorToolbar = document.querySelector('.toolbar-color');
+                        this.$colorToolbar.addEventListener('click', event =>{
+                            // this.classList.toggle("visible")
+                            this.xCord = event.ClientX;
+                            console.log("X". this.xCord)
+                            this.yCord = event.ClientY;
+                          })
                 }
             }
 
